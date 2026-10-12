@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta name="description" content="نسخة تجريبية عامة لواجهة دليل الموظفين، ببيانات وهمية لا تمثل موظفين حقيقيين.">
+  <title>دليل الموظفين | نسخة تجريبية عامة</title>
+  <style>
+    :root { color-scheme: light; --ink:#24221f; --muted:#79746c; --gold:#ad8950; --gold-dark:#876632; --gold-pale:#f5efe3; --paper:#fff; --canvas:#f7f6f2; --line:#eae7df; font-family:"Segoe UI",Tahoma,Arial,sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--canvas); color:var(--ink); }
+    button,input { font:inherit; }
+    .topbar { background:var(--paper); border-bottom:1px solid var(--line); }
+    .topbar-inner,main { width:min(1080px,calc(100% - 32px)); margin:auto; }
+    .topbar-inner { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand strong { display:block; font-size:17px; }
+    .brand span,.top-label { color:var(--muted); font-size:12px; }
+    main { margin-top:34px; }
+    .intro { margin-bottom:22px; }
+    .eyebrow { color:var(--gold-dark); font-size:12px; font-weight:700; }
+    h1 { font-size:clamp(25px,4vw,34px); margin:7px 0; }
+    .intro p { margin:8px 0; color:var(--muted); font-size:14px; }
+    .notice { margin:18px 0; padding:14px 16px; border:1px solid #e5d6bb; border-radius:10px; background:var(--gold-pale); color:#665335; font-size:13px; line-height:1.8; }
+    .panel { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:20px; }
+    label { display:block; font-weight:650; font-size:14px; margin-bottom:10px; }
+    input { width:100%; height:50px; padding:0 14px; border:1px solid #ddd8ce; border-radius:8px; outline:none; }
+    input:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(173,137,80,.13); }
+    .results { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; margin-top:15px; }
+    .employee { display:flex; align-items:center; gap:12px; width:100%; padding:13px; border:1px solid var(--line); border-radius:9px; background:white; text-align:right; color:var(--ink); cursor:pointer; }
+    .employee:hover,.employee[aria-pressed="true"] { background:#faf8f3; border-color:#d8c39d; }
+    .avatar { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; border-radius:50%; background:var(--gold-pale); color:var(--gold-dark); font-weight:700; }
+    .employee strong,.employee small { display:block; }
+    .employee strong { font-size:13px; }
+    .employee small { margin-top:5px; color:var(--muted); font-size:11px; }
+    .detail { margin-top:16px; }
+    .detail h2 { margin:0 0 14px; font-size:18px; }
+    .fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+    .field { padding:12px; border:1px solid var(--line); border-radius:8px; }
+    .field span,.field strong { display:block; }
+    .field span { margin-bottom:6px; color:var(--muted); font-size:11px; }
+    .field strong { font-size:13px; }
+    .empty { padding:24px 8px; color:var(--muted); text-align:center; font-size:13px; }
+    footer { margin:24px 0 34px; color:var(--muted); text-align:center; font-size:11px; }
+    @media(max-width:560px) { .top-label{display:none} main{margin-top:24px} .panel{padding:15px} }
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="topbar-inner"><div class="brand"><strong>دليل الموظفين</strong><span>نسخة تجريبية عامة</span></div><span class="top-label">واجهة توضيحية — لا تعرض سجلات حقيقية</span></div></header>
+  <main>
+    <section class="intro"><div class="eyebrow">نموذج آمن للنشر العام</div><h1>البحث في دليل الموظفين</h1><p>ابحث بالاسم أو الكود لعرض مثال على واجهة الدليل.</p></section>
+    <div class="notice" role="note">هذه نسخة تجريبية عامة تستخدم أسماء وأكوادًا وبيانات خيالية. لا تحتوي على بيانات موظفين حقيقيين أو أرقام هواتف أو تواريخ ميلاد أو صور أو تقارير.</div>
+    <section class="panel" aria-label="البحث في الدليل التجريبي"><label for="search">ابحث بالاسم أو الكود التجريبي</label><input id="search" type="search" autocomplete="off" placeholder="مثال: موظف تجريبي أو DEMO-001"><div id="results" class="results" aria-live="polite"></div></section>
+    <section id="detail" class="panel detail" aria-live="polite"><div class="empty">اختر سجلًا تجريبيًا لعرض تفاصيله.</div></section>
+    <footer>بيانات تجريبية مولّدة للعرض فقط — لا تستخدم لإدارة الموظفين.</footer>
+  </main>
+  <script>
+    const demoStaff = [
+      { name:"موظف تجريبي أول", code:"DEMO-001", department:"قسم توضيحي", role:"مسمى تجريبي", hiringDate:"غير متاح", phone:"غير متاح", birthDate:"غير متاح" },
+      { name:"موظفة تجريبية ثانية", code:"DEMO-002", department:"قسم توضيحي", role:"مسمى تجريبي", hiringDate:"غير متاح", phone:"غير متاح", birthDate:"غير متاح" }
+    ];
+    const search=document.querySelector("#search"), results=document.querySelector("#results"), detail=document.querySelector("#detail");
+    let selectedCode="";
+    function renderDetail(employee) {
+      selectedCode=employee.code; detail.replaceChildren();
+      const heading=document.createElement("h2"); heading.textContent=employee.name;
+      const fields=document.createElement("div"); fields.className="fields";
+      for (const [label,value] of [["الاسم",employee.name],["الكود",employee.code],["القسم",employee.department],["المسمى الوظيفي",employee.role],["تاريخ التعيين",employee.hiringDate],["رقم الهاتف",employee.phone],["تاريخ الميلاد",employee.birthDate]]) {
+        const field=document.createElement("div"); field.className="field";
+        const caption=document.createElement("span"); caption.textContent=label;
+        const content=document.createElement("strong"); content.textContent=value;
+        field.append(caption,content); fields.append(field);
+      }
+      detail.append(heading,fields); renderResults();
+    }
+    function renderResults() {
+      const query=search.value.trim().toLocaleLowerCase("ar");
+      const matches=query ? demoStaff.filter(employee=>`${employee.name} ${employee.code}`.toLocaleLowerCase("ar").includes(query)) : [];
+      results.replaceChildren();
+      if (!matches.length) {
+        const empty=document.createElement("div"); empty.className="empty"; empty.textContent=query ? "لا توجد نتائج تجريبية مطابقة." : "اكتب اسمًا أو كودًا تجريبيًا لعرض النتائج."; results.append(empty);
+        selectedCode=""; detail.innerHTML='<div class="empty">اختر سجلًا تجريبيًا لعرض تفاصيله.</div>'; return;
+      }
+      for (const employee of matches) {
+        const button=document.createElement("button"); button.type="button"; button.className="employee"; button.setAttribute("aria-pressed",String(employee.code===selectedCode));
+        const avatar=document.createElement("span"); avatar.className="avatar"; avatar.textContent="؟";
+        const text=document.createElement("span"), name=document.createElement("strong"), code=document.createElement("small");
+        name.textContent=employee.name; code.textContent=employee.code; text.append(name,code); button.append(avatar,text);
+        button.addEventListener("click",()=>renderDetail(employee)); results.append(button);
+      }
+      const selected=matches.find(employee=>employee.code===selectedCode); if(matches.length===1&&!selected) renderDetail(matches[0]);
+    }
+    search.addEventListener("input",renderResults); renderResults();
+  </script>
+</body>
+</html>
